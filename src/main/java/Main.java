@@ -1,3 +1,4 @@
+import java.util.Map;
 import comparator.ContentComparator;
 import comparator.TextAnalyzer;
 import editor.DocumentManager;
@@ -23,7 +24,7 @@ public class Main {
         textEditor.add(mouseTracker);
 
         // Crear una instancia de ScrollBar y agregarla a la ventana
-        ScrollBar.createScrollBar(textEditor);
+        ScrollBar.createScrollBar(textEditor.getTextArea());
 
         // Crear una instancia de ContactManager y agregar un contacto
         ContactManager contactManager = new ContactManager();
