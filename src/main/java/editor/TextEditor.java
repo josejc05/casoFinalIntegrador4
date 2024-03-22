@@ -20,4 +20,8 @@ public class TextEditor extends JFrame {
     public String getText() {
         return textArea.getText();
     }
+
+    public JTextArea getTextArea() {
+        return textArea;
+    }
 }
