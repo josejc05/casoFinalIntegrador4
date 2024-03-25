@@ -17,4 +17,8 @@ public class ContactManager {
     public void removeContact(String name) {
         contacts.remove(name);
     }
+
+    public String findContact(String name) {
+        return contacts.get(name);
+    }
 }
