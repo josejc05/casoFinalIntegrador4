@@ -1,5 +1,7 @@
 import editor.TextEditor;
 import search.ContactManager;
+import comparator.ContentComparator;
+import validation.EmailValidator;
 
 import java.io.IOException;
 
@@ -34,5 +36,22 @@ public class Main {
         // Recuperar y imprimir un contacto
         String contactEmail = contactManager.getContact("John Doe");
         System.out.println("Email de John Doe: " + contactEmail);
+
+        // Crear una instancia de ContentComparator
+        ContentComparator contentComparator = new ContentComparator();
+
+        // Comparar dos archivos y contar palabras
+        try {
+            boolean areFilesEqual = contentComparator.compareFiles("file1.txt", "file2.txt");
+            int wordCount = contentComparator.countWords("file1.txt");
+            System.out.println("Los archivos son iguales: " + areFilesEqual);
+            System.out.println("Número de palabras en file1.txt: " + wordCount);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Validar un correo electrónico
+        boolean isValidEmail = EmailValidator.validate("test@example.com");
+        System.out.println("El correo electrónico es válido: " + isValidEmail);
     }
 }
