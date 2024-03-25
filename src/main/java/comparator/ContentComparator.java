@@ -10,4 +10,9 @@ public class ContentComparator {
 
         return frequencyMap1.equals(frequencyMap2);
     }
+    public static boolean compareFiles(String filePath1, String filePath2) throws IOException {
+        String text1 = new String(Files.readAllBytes(Paths.get(filePath1)));
+        String text2 = new String(Files.readAllBytes(Paths.get(filePath2)));
+        return compareContent(text1, text2);
+    }
 }
