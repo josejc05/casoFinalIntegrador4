@@ -2,6 +2,9 @@ package editor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TextEditor extends JFrame {
     private JTextArea textArea;
@@ -24,6 +27,7 @@ public class TextEditor extends JFrame {
     public JTextArea getTextArea() {
         return textArea;
     }
+
     public void saveToFile(String filename) throws IOException {
         Files.write(Paths.get(filename), textArea.getText().getBytes());
     }
