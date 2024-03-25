@@ -20,4 +20,14 @@ public class WordSearcher {
         }
         return count;
     }
+
+    public static int countOccurrencesInText(String text, String word) {
+        int count = 0;
+        int index = 0;
+        while ((index = text.indexOf(word, index)) != -1) {
+            count++;
+            index += word.length();
+        }
+        return count;
+    }
 }
