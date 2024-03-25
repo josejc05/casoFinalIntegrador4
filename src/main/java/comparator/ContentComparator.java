@@ -19,4 +19,9 @@ public class ContentComparator {
         String text2 = new String(Files.readAllBytes(Paths.get(filePath2)));
         return compareContent(text1, text2);
     }
+    public int countWords(String filePath) throws IOException {
+        String text = new String(Files.readAllBytes(Paths.get(filePath)));
+        String[] words = text.split("\\s+");
+        return words.length;
+    }
 }
