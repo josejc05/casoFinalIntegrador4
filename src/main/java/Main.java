@@ -1,31 +1,57 @@
-import javax.swing.*;
+import editor.TextEditor;
+import search.ContactManager;
+import comparator.ContentComparator;
+import validation.EmailValidator;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-public class TextEditor extends JPanel {
-    private JTextArea textArea;
+public class Main {
+    public static void main(String[] args) {
+        // Crear una instancia de TextEditor
+        TextEditor textEditor = new TextEditor();
+        textEditor.setText("Texto de prueba");
+        textEditor.setVisible(true);
 
-    public TextEditor() {
-        textArea = new JTextArea();
-        add(textArea);
-    }
+        // Guardar el contenido del TextEditor en un archivo
+        try {
+            textEditor.saveToFile("test.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    public void setText(String text) {
-        textArea.setText(text);
-    }
+        // Cargar el contenido del archivo en el TextEditor
+        try {
+            textEditor.loadFromFile("test.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    public String getText() {
-        return textArea.getText();
-    }
+        // Imprimir el contenido del TextEditor
+        System.out.println(textEditor.getText());
 
-    public void saveToFile(String filePath) throws IOException {
-        String text = getText();
-        Files.write(Paths.get(filePath), text.getBytes());
-    }
+        // Crear una instancia de ContactManager
+        ContactManager contactManager = new ContactManager();
+        contactManager.addContact("John Doe", "johndoe@example.com");
 
-    public void loadFromFile(String filePath) throws IOException {
-        String text = new String(Files.readAllBytes(Paths.get(filePath)));
-        setText(text);
+        // Recuperar y imprimir un contacto
+        String contactEmail = contactManager.getContact("John Doe");
+        System.out.println("Email de John Doe: " + contactEmail);
+
+        // Crear una instancia de ContentComparator
+        ContentComparator contentComparator = new ContentComparator();
+
+        // Comparar dos archivos y contar palabras
+        try {
+            boolean areFilesEqual = contentComparator.compareFiles("file1.txt", "file2.txt");
+            int wordCount = contentComparator.countWords("file1.txt");
+            System.out.println("Los archivos son iguales: " + areFilesEqual);
+            System.out.println("Número de palabras en file1.txt: " + wordCount);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Validar un correo electrónico
+        boolean isValidEmail = EmailValidator.validate("test@example.com");
+        System.out.println("El correo electrónico es válido: " + isValidEmail);
     }
 }

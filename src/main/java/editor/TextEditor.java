@@ -1,6 +1,9 @@
 package editor;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TextEditor extends JPanel {
     private JTextArea textArea;
@@ -18,5 +21,13 @@ public class TextEditor extends JPanel {
         return textArea.getText();
     }
 
-    // Implementar los métodos para guardar y cargar desde un archivo...
+    public void saveToFile(String filePath) throws IOException {
+        String text = getText();
+        Files.write(Paths.get(filePath), text.getBytes());
+    }
+
+    public void loadFromFile(String filePath) throws IOException {
+        String text = new String(Files.readAllBytes(Paths.get(filePath)));
+        setText(text);
+    }
 }
