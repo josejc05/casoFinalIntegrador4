@@ -10,6 +10,10 @@ public class ContactManager {
         contacts.put(name, email);
     }
 
+    public Map<String, String> getContacts() {
+        return new HashMap<>(contacts);
+    }
+
     public String getContact(String name) {
         return contacts.get(name);
     }
