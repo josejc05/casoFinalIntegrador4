@@ -16,6 +16,7 @@ public class TextEditor extends JPanel {
         saveButton.addActionListener(e -> {
             try {
                 saveToFile(filePath);
+                JOptionPane.showMessageDialog(null, "El texto se ha guardado correctamente");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
