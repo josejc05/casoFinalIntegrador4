@@ -76,8 +76,10 @@ public class Main {
         abrirEditorTextoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         abrirEditorTextoButton.setBackground(backgroundColor);
         abrirEditorTextoButton.addActionListener(e -> {
+            frame.getContentPane().removeAll();
             frame.getContentPane().add(textEditor);
             frame.revalidate();
+            frame.repaint();
         });
 
         JButton buscarArchivoButton = new JButton("Buscar en Archivo");
