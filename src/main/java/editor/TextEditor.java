@@ -10,7 +10,8 @@ public class TextEditor extends JPanel {
     private String filePath = "savedText.txt"; // archivo donde se guardará el texto
 
     public TextEditor() {
-        textArea = new JTextArea();
+        textArea = new JTextArea(20, 50);
+        JScrollPane scrollPane = new JScrollPane(textArea);
         JButton saveButton = new JButton("Guardar");
         saveButton.addActionListener(e -> {
             try {
@@ -19,7 +20,7 @@ public class TextEditor extends JPanel {
                 ioException.printStackTrace();
             }
         });
-        add(textArea);
+        add(scrollPane);
         add(saveButton);
     }
 
