@@ -78,6 +78,11 @@ public class Main {
         abrirEditorTextoButton.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.getContentPane().add(textEditor);
+            try {
+                textEditor.loadFromFile("savedText.txt"); // cargar el texto guardado
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
             frame.revalidate();
             frame.repaint();
         });

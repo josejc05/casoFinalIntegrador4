@@ -7,10 +7,20 @@ import java.nio.file.Paths;
 
 public class TextEditor extends JPanel {
     private JTextArea textArea;
+    private String filePath = "savedText.txt"; // archivo donde se guardará el texto
 
     public TextEditor() {
         textArea = new JTextArea();
+        JButton saveButton = new JButton("Guardar");
+        saveButton.addActionListener(e -> {
+            try {
+                saveToFile(filePath);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         add(textArea);
+        add(saveButton);
     }
 
     public void setText(String text) {
