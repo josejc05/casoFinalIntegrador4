@@ -8,8 +8,12 @@ import java.nio.file.Paths;
 public class TextEditor extends JPanel {
     private JTextArea textArea;
     private String filePath = "savedText.txt"; // archivo donde se guardará el texto
+    private JFrame frame;
+    private JPanel panel;
 
-    public TextEditor() {
+    public TextEditor(JFrame frame, JPanel panel) {
+        this.frame = frame;
+        this.panel = panel;
         textArea = new JTextArea(20, 50);
         JScrollPane scrollPane = new JScrollPane(textArea);
         JButton saveButton = new JButton("Guardar");
@@ -17,6 +21,10 @@ public class TextEditor extends JPanel {
             try {
                 saveToFile(filePath);
                 JOptionPane.showMessageDialog(null, "El texto se ha guardado correctamente");
+                frame.getContentPane().removeAll();
+                frame.getContentPane().add(panel);
+                frame.revalidate();
+                frame.repaint();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

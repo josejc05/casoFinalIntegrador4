@@ -69,7 +69,7 @@ public class Main {
             JOptionPane.showMessageDialog(null, contactos.toString());
         });
 
-        TextEditor textEditor = new TextEditor();
+        TextEditor textEditor = new TextEditor(frame, panel);
         JButton abrirEditorTextoButton = new JButton("Abrir Editor de Texto");
         abrirEditorTextoButton.setBorder(new EmptyBorder(5, 5, 5, 5));
         abrirEditorTextoButton.setFont(new Font("Arial", Font.BOLD, 14));
