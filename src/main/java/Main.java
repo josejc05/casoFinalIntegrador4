@@ -155,7 +155,7 @@ public class Main {
             saveButton.addActionListener(e -> {
                 BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
                 Graphics2D g2d = image.createGraphics();
-                paint(g2d);
+                paintAll(g2d); // Modificado aquí
                 g2d.dispose();
                 try {
                     ImageIO.write(image, "png", new File("dibujo.png"));
