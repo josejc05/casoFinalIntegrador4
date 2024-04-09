@@ -12,6 +12,9 @@ import java.nio.file.Paths;
 import javax.swing.border.EmptyBorder;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
@@ -121,7 +124,7 @@ public class Main {
         dibujarButton.setBackground(backgroundColor);
         dibujarButton.addActionListener(e -> {
             frame.getContentPane().removeAll();
-            frame.getContentPane().add(new DrawingPanel());
+            frame.getContentPane().add(new DrawingPanel(frame, panel));
             frame.revalidate();
             frame.repaint();
         });
@@ -139,7 +142,7 @@ public class Main {
     static class DrawingPanel extends JPanel {
         private List<Point> points = new ArrayList<>();
 
-        public DrawingPanel() {
+        public DrawingPanel(JFrame frame, JPanel panel) {
             addMouseMotionListener(new MouseMotionAdapter() {
                 @Override
                 public void mouseDragged(MouseEvent e) {
@@ -147,6 +150,33 @@ public class Main {
                     repaint();
                 }
             });
+
+            JButton saveButton = new JButton("Guardar Dibujo");
+            saveButton.addActionListener(e -> {
+                BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+                Graphics2D g2d = image.createGraphics();
+                paint(g2d);
+                g2d.dispose();
+                try {
+                    ImageIO.write(image, "png", new File("dibujo.png"));
+                    JOptionPane.showMessageDialog(null, "Dibujo guardado correctamente");
+                    frame.getContentPane().removeAll();
+                    frame.getContentPane().add(panel);
+                    frame.revalidate();
+                    frame.repaint();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+
+            JButton clearButton = new JButton("Limpiar Dibujo");
+            clearButton.addActionListener(e -> {
+                points.clear();
+                repaint();
+            });
+
+            add(saveButton);
+            add(clearButton);
         }
 
         @Override
