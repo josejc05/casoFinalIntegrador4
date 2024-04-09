@@ -37,7 +37,7 @@ public class Main {
 
         ContactManager contactManager = new ContactManager();
 
-        Color backgroundColor = new Color(238, 238, 238);
+        Color backgroundColor = new Color(70, 130, 180);
 
         JPanel panel = new JPanel() {
             @Override
@@ -51,10 +51,11 @@ public class Main {
         panel.add(mouseYLabel);
 
         JButton registrarContactoButton = new JButton("Registrar Contacto");
-        registrarContactoButton.setBorder(new EmptyBorder(5, 5, 5, 5));
         registrarContactoButton.setFont(new Font("Arial", Font.BOLD, 14));
-        registrarContactoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registrarContactoButton.setBackground(backgroundColor);
+        registrarContactoButton.setForeground(Color.WHITE);
+        registrarContactoButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+        registrarContactoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registrarContactoButton.addActionListener(e -> {
             String nombre = JOptionPane.showInputDialog("Ingrese el nombre del contacto");
             String correo = JOptionPane.showInputDialog("Ingrese el correo del contacto");
@@ -67,10 +68,11 @@ public class Main {
         });
 
         JButton verContactosButton = new JButton("Ver Contactos Registrados");
-        verContactosButton.setBorder(new EmptyBorder(5, 5, 5, 5));
         verContactosButton.setFont(new Font("Arial", Font.BOLD, 14));
-        verContactosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         verContactosButton.setBackground(backgroundColor);
+        verContactosButton.setForeground(Color.WHITE);
+        verContactosButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+        verContactosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         verContactosButton.addActionListener(e -> {
             StringBuilder contactos = new StringBuilder();
             for (String nombre : contactManager.getContactos().keySet()) {
@@ -82,10 +84,11 @@ public class Main {
 
         TextEditor textEditor = new TextEditor(frame, panel);
         JButton abrirEditorTextoButton = new JButton("Abrir Editor de Texto");
-        abrirEditorTextoButton.setBorder(new EmptyBorder(5, 5, 5, 5));
         abrirEditorTextoButton.setFont(new Font("Arial", Font.BOLD, 14));
-        abrirEditorTextoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         abrirEditorTextoButton.setBackground(backgroundColor);
+        abrirEditorTextoButton.setForeground(Color.WHITE);
+        abrirEditorTextoButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+        abrirEditorTextoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         abrirEditorTextoButton.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.getContentPane().add(textEditor);
@@ -99,10 +102,11 @@ public class Main {
         });
 
         JButton buscarArchivoButton = new JButton("Buscar en Archivo");
-        buscarArchivoButton.setBorder(new EmptyBorder(5, 5, 5, 5));
         buscarArchivoButton.setFont(new Font("Arial", Font.BOLD, 14));
-        buscarArchivoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buscarArchivoButton.setBackground(backgroundColor);
+        buscarArchivoButton.setForeground(Color.WHITE);
+        buscarArchivoButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+        buscarArchivoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buscarArchivoButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -119,10 +123,11 @@ public class Main {
         });
 
         JButton dibujarButton = new JButton("Dibujar");
-        dibujarButton.setBorder(new EmptyBorder(5, 5, 5, 5));
         dibujarButton.setFont(new Font("Arial", Font.BOLD, 14));
-        dibujarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         dibujarButton.setBackground(backgroundColor);
+        dibujarButton.setForeground(Color.WHITE);
+        dibujarButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+        dibujarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         dibujarButton.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.getContentPane().add(new DrawingPanel(frame, panel));
