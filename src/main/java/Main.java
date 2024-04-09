@@ -1,6 +1,7 @@
 import editor.TextEditor;
 import search.ContactManager;
 import comparator.ContentComparator;
+import validation.EmailValidator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +52,10 @@ public class Main {
         registrarContactoButton.addActionListener(e -> {
             String nombre = JOptionPane.showInputDialog("Ingrese el nombre del contacto");
             String correo = JOptionPane.showInputDialog("Ingrese el correo del contacto");
+            while (!EmailValidator.validate(correo)) {
+                JOptionPane.showMessageDialog(null, "Correo no válido. Inténtelo de nuevo.");
+                correo = JOptionPane.showInputDialog("Ingrese el correo del contacto");
+            }
             contactManager.addContact(nombre, correo);
             JOptionPane.showMessageDialog(null, "Contacto registrado exitosamente");
         });
