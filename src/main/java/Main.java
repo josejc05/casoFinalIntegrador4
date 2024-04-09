@@ -2,7 +2,6 @@ import editor.TextEditor;
 import search.ContactManager;
 import comparator.ContentComparator;
 import validation.EmailValidator;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseMotionAdapter;
@@ -10,6 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.swing.border.EmptyBorder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -112,12 +113,51 @@ public class Main {
             }
         });
 
+        JButton dibujarButton = new JButton("Dibujar");
+        dibujarButton.setBorder(new EmptyBorder(5, 5, 5, 5));
+        dibujarButton.setFont(new Font("Arial", Font.BOLD, 14));
+        dibujarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dibujarButton.setBackground(backgroundColor);
+        dibujarButton.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.getContentPane().add(new DrawingPanel());
+            frame.revalidate();
+            frame.repaint();
+        });
+
         panel.add(registrarContactoButton);
         panel.add(verContactosButton);
         panel.add(abrirEditorTextoButton);
         panel.add(buscarArchivoButton);
+        panel.add(dibujarButton);
 
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
+    }
+
+    static class DrawingPanel extends JPanel {
+        private List<Point> points = new ArrayList<>();
+
+        public DrawingPanel() {
+            addMouseMotionListener(new MouseMotionAdapter() {
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    points.add(e.getPoint());
+                    repaint();
+                }
+            });
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            for (int i = 1; i < points.size(); i++) {
+                int x1 = points.get(i - 1).x;
+                int y1 = points.get(i - 1).y;
+                int x2 = points.get(i).x;
+                int y2 = points.get(i).y;
+                g.drawLine(x1, y1, x2, y2);
+            }
+        }
     }
 }
