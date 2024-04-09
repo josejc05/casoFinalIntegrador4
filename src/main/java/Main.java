@@ -4,6 +4,7 @@ import comparator.ContentComparator;
 import validation.EmailValidator;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +25,7 @@ public class Main {
 
         frame.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseMoved(java.awt.event.MouseEvent e) {
+            public void mouseMoved(MouseEvent e) {
                 mouseXLabel.setText("X: " + e.getX());
                 mouseYLabel.setText("Y: " + e.getY());
             }
