@@ -4,6 +4,7 @@ import comparator.ContentComparator;
 import validation.EmailValidator;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
@@ -140,14 +141,28 @@ public class Main {
     }
 
     static class DrawingPanel extends JPanel {
-        private List<Point> points = new ArrayList<>();
+        private List<List<Point>> lines = new ArrayList<>();
+        private List<Point> currentLine;
 
         public DrawingPanel(JFrame frame, JPanel panel) {
             addMouseMotionListener(new MouseMotionAdapter() {
                 @Override
                 public void mouseDragged(MouseEvent e) {
-                    points.add(e.getPoint());
+                    currentLine.add(e.getPoint());
                     repaint();
+                }
+            });
+
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    currentLine = new ArrayList<>();
+                    currentLine.add(e.getPoint());
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    lines.add(currentLine);
                 }
             });
 
@@ -155,7 +170,7 @@ public class Main {
             saveButton.addActionListener(e -> {
                 BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
                 Graphics2D g2d = image.createGraphics();
-                paintAll(g2d); // Modificado aquí
+                paintAll(g2d);
                 g2d.dispose();
                 try {
                     ImageIO.write(image, "png", new File("dibujo.png"));
@@ -171,7 +186,7 @@ public class Main {
 
             JButton clearButton = new JButton("Limpiar Dibujo");
             clearButton.addActionListener(e -> {
-                points.clear();
+                lines.clear();
                 repaint();
             });
 
@@ -182,12 +197,23 @@ public class Main {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            for (int i = 1; i < points.size(); i++) {
-                int x1 = points.get(i - 1).x;
-                int y1 = points.get(i - 1).y;
-                int x2 = points.get(i).x;
-                int y2 = points.get(i).y;
-                g.drawLine(x1, y1, x2, y2);
+            for (List<Point> line : lines) {
+                for (int i = 1; i < line.size(); i++) {
+                    int x1 = line.get(i - 1).x;
+                    int y1 = line.get(i - 1).y;
+                    int x2 = line.get(i).x;
+                    int y2 = line.get(i).y;
+                    g.drawLine(x1, y1, x2, y2);
+                }
+            }
+            if (currentLine != null) {
+                for (int i = 1; i < currentLine.size(); i++) {
+                    int x1 = currentLine.get(i - 1).x;
+                    int y1 = currentLine.get(i - 1).y;
+                    int x2 = currentLine.get(i).x;
+                    int y2 = currentLine.get(i).y;
+                    g.drawLine(x1, y1, x2, y2);
+                }
             }
         }
     }
